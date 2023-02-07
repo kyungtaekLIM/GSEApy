@@ -311,11 +311,12 @@ class GSEA(GSEAbase):
                 "Start to generate GSEApy reports and figures............"
             )
 
-        self.ranking = pd.Series(gsum.rankings[0], index=dat.index[gsum.indices[0]])
         # reorder datarame for heatmap
         if self.permutation_type == "gene_set":
+            self.ranking = pd.Series(gsum.rankings[0], index=dat2.index)
             self._heatmat(df=dat.loc[dat2.index], classes=cls_vector)
         else:
+            self.ranking = pd.Series(gsum.rankings[0], index=dat.index[gsum.indices[0]])
             self._heatmat(df=dat.iloc[gsum.indices[0]], classes=cls_vector)
         # write output and plotting
         self.to_df(gsum.summaries, gmt, self.ranking)
