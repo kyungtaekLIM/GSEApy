@@ -363,7 +363,9 @@ class GSEAbase(object):
             outfile = os.path.join(outdir, "{0}.{1}".format(term, self.format))
             if self.module == "gsea":
                 outfile2 = "{0}/{1}.heatmap.{2}".format(outdir, term, self.format)
+                outfile_mat = "{0}/{1}.heatmap.csv".format(outdir, term)
                 heatmat = self.heatmat.iloc[hit, :]
+                heatmat.to_csv(outfile_mat)
                 width = np.clip(heatmat.shape[1], 4, 20)
                 height = np.clip(heatmat.shape[0], 4, 20)
                 heatmap(
